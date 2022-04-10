@@ -13,10 +13,10 @@ export class ApiPhotoService extends HttpService {
 
 
 
-    static getPhotos({ albumId: albomId }: TGetPhotosPayload) {
+    static getPhotos({ albumId }: TGetPhotosPayload) {
 
         const response = this.request({
-            url: `${PHOTO_URL.getPhotos}?albumId=${albomId}`,
+            url: `${PHOTO_URL.getPhotos}?albumId=${albumId}`,
             method: 'GET',
 
         })

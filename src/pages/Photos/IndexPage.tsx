@@ -14,22 +14,22 @@ const IndexPage: FC = () => {
     const dispatch = useDispatch()
     const { photos, meta } = useTypedSelector(getPhotoSelector)
 
-    const [albomIndex, setAlbomIndex] = useState<number | null>(null)
+    const [albumIndex, setAlbumIndex] = useState<number | null>(null)
 
     const Events = {
 
         onInputChangeHandler: (e: SyntheticEvent) => {
-            setAlbomIndex(parseInt((e.target as HTMLInputElement).value))
+            setAlbumIndex(parseInt((e.target as HTMLInputElement).value))
         },
         onClickButtonHandler: () => {
-            Schema.albomValue.condition && meta?.albumId != albomIndex && dispatch(photoActions.getPhotos({ albumId: albomIndex as number }))
+            Schema.albumValue.condition && meta?.albumId != albumIndex && dispatch(photoActions.getPhotos({ albumId: albumIndex as number }))
         }
 
     }
 
     const Schema = {
-        albomValue: {
-            condition: albomIndex as number >= 1 && albomIndex as number <= 100
+        albumValue: {
+            condition: albumIndex as number >= 1 && albumIndex as number <= 100
         }
     }
 
@@ -39,8 +39,8 @@ const IndexPage: FC = () => {
     return (
         <Container>
             <SearchContainer>
-                <Input type='number' label='Insert number from 1 to 100:' onChange={Events.onInputChangeHandler} isValid={Schema.albomValue.condition} />
-                <Button onClick={Events.onClickButtonHandler} colorTheme={(meta?.albumId == albomIndex || !Schema.albomValue.condition) ? 'grey' : 'blue'}>Get photos</Button>
+                <Input type='number' label='Insert number from 1 to 100:' onChange={Events.onInputChangeHandler} isValid={Schema.albumValue.condition} />
+                <Button onClick={Events.onClickButtonHandler} colorTheme={(meta?.albumId == albumIndex || !Schema.albumValue.condition) ? 'grey' : 'blue'}>Get photos</Button>
             </SearchContainer>
             <PhotosContainer>
                 {photos.map((photo, index) => (
